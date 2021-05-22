@@ -16,17 +16,40 @@ import ast
 class JsonWriterPipeline:
 
     def open_spider(self, spider):
-        self.file = open('babooshka.json', 'w')
+        # self.file = open('locationHunters.json', 'w')
+        # self.file = open('babooshka_1.json', 'w')
+        # self.file = open('kinolocation.json', 'w')
+        # self.file = open('kinobank.json', 'w')
+        self.file = open('kinopartner.json', 'w')
 
     def close_spider(self, spider):
         self.file.close()
 
+    # def process_item_1(self, item_1, spider):
+    #     line_1 = json.dumps(dict(item_1)) + "\n"
+    #     r = requests.post("https://cinemalocations.ru/api/token", params={"email": "admin", "password": "123456"})
+    #     token = r.json()["token"]
+    #
+    #     headers = {
+    #         "Authorization": "Bearer " + token,
+    #         "Content-Type": "application/json"
+    #     }
+    #     r = requests.post("https://cinemalocations.ru/api/location", json=ast.literal_eval(line_1), headers=headers)
+    #
+    #     print(r.text)
+    #
+    #     self.file.write(line_1)
+    #     return item_1
+
+
+
     def process_item(self, item, spider):
         line = json.dumps(dict(item)) + "\n"
 
-        # print (line)
-        # l = ast.literal_eval(line)
-        # print (l)
+
+        print (line)
+        l = ast.literal_eval(line)
+        print (l)
 
         r = requests.post("https://cinemalocations.ru/api/token", params={"email": "admin", "password": "123456"})
         token = r.json()["token"]
@@ -51,13 +74,15 @@ class JsonWriterPipeline:
             "Authorization": "Bearer " + token,
             "Content-Type": "application/json"
         }
-        r = requests.post("https://cinemalocations.ru/api/location", json=ast.literal_eval(line), headers=headers)
+        r = requests.post("https://cinemalocations.ru/api/location?generateTags=1", json=ast.literal_eval(line), headers=headers)
        # r = requests.post("https://cinemalocations.ru/api/location", json=location, headers=headers)
 
         print(r.text)
 
         self.file.write(line)
         return item
+
+
 
 
 
