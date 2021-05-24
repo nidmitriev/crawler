@@ -15,15 +15,15 @@ import ast
 
 class JsonWriterPipeline:
 
-    def open_spider(self, spider):
-        # self.file = open('locationHunters.json', 'w')
-        # self.file = open('babooshka_1.json', 'w')
-        # self.file = open('kinolocation.json', 'w')
-        # self.file = open('kinobank.json', 'w')
-        self.file = open('kinopartner.json', 'w')
-
-    def close_spider(self, spider):
-        self.file.close()
+    # def open_spider(self, spider):
+    #     # self.file = open('locationHunters.json', 'w')
+    #     # self.file = open('babooshka_1.json', 'w')
+    #     # self.file = open('kinolocation.json', 'w')
+    #     # self.file = open('kinobank.json', 'w')
+    #     self.file = open('kinopartner.json', 'w')
+    #
+    # def close_spider(self, spider):
+    #     self.file.close()
 
     # def process_item_1(self, item_1, spider):
     #     line_1 = json.dumps(dict(item_1)) + "\n"
@@ -79,7 +79,7 @@ class JsonWriterPipeline:
 
         print(r.text)
 
-        self.file.write(line)
+        # self.file.write(line)
         return item
 
 
